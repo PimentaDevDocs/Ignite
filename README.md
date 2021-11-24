@@ -1,2 +1,2 @@
-# ignite-nodejs
-Projetos do curso  RocketSeat  Ignite
+# ignite
+Projetos do curso RocketSeat Ignite
