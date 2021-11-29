@@ -1,0 +1,62 @@
+GET {{localhost}}/balance
+Accept: application/json
+cpf: {{cpf}}
+
+###
+DELETE {{localhost}}/account
+Accept: application/json
+cpf: {{cpf}}
+
+###
+GET {{localhost}}/account
+Accept: application/json
+cpf: {{cpf}}
+
+###
+PUT {{localhost}}/account
+Content-Type: application/json
+cpf: {{cpf}}
+
+{
+  "name": "vitor"
+}
+
+###
+GET {{localhost}}/statement/date?date=2021-11-28
+Accept: application/json
+cpf: {{cpf}}
+
+###
+POST {{localhost}}/withdraw
+Content-Type: application/json
+cpf: {{cpf}}
+
+{
+  "amount": 100
+}
+
+###
+POST {{localhost}}/deposit
+Content-Type: application/json
+cpf: {{cpf}}
+
+{
+  "amount": 3500.00,
+  "description": "Transferencia Ignite"
+}
+
+###
+GET {{localhost}}/statement
+Content-Type: application/json
+cpf: {{cpf}}
+
+###
+POST {{localhost}}/account
+Content-Type: application/json
+
+{
+  "cpf": {{cpf}},
+  "name": "Fulano de Tal"
+}
+
+
