@@ -5,6 +5,11 @@ export interface ICategoryDTO {
     description: string;
 }
 
+interface IImportCatergory {
+    name: string;
+    description: string;
+}
+
 export interface ICategoriyRepository {
 
     findByName(name: string): Category | undefined;

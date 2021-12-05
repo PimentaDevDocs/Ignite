@@ -5,7 +5,7 @@ export class Category {
     id?: string;
     name: string;
     description: string;
-    createdAt: Date;
+    createdAt?: Date;
 
     constructor() {
 
