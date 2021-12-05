@@ -1,0 +1,21 @@
+POST http://localhost:3333/categories/import
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="x.csv"
+< x.csv
+
+###
+
+GET localhost:3333/categories
+Accept: application/json
+
+###
+
+POST http://localhost:3333/categories
+Content-Type: application/json
+
+{
+  "name": "Category 1",
+  "description": "Category 1 description"
+}

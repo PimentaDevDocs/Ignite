@@ -1,19 +1,21 @@
-GET {{localhost}}/balance
+@cpf = 70023173158
+
+GET {{hostName}}/balance
 Accept: application/json
 cpf: {{cpf}}
 
 ###
-DELETE {{localhost}}/account
+DELETE {{hostName}}/account
 Accept: application/json
 cpf: {{cpf}}
 
 ###
-GET {{localhost}}/account
+GET {{hostName}}/account
 Accept: application/json
 cpf: {{cpf}}
 
 ###
-PUT {{localhost}}/account
+PUT {{hostName}}/account
 Content-Type: application/json
 cpf: {{cpf}}
 
@@ -22,12 +24,12 @@ cpf: {{cpf}}
 }
 
 ###
-GET {{localhost}}/statement/date?date=2021-11-28
+GET {{hostName}}/statement/date?date=2021-11-28
 Accept: application/json
 cpf: {{cpf}}
 
 ###
-POST {{localhost}}/withdraw
+POST {{hostName}}/withdraw
 Content-Type: application/json
 cpf: {{cpf}}
 
@@ -36,7 +38,7 @@ cpf: {{cpf}}
 }
 
 ###
-POST {{localhost}}/deposit
+POST {{hostName}}/deposit
 Content-Type: application/json
 cpf: {{cpf}}
 
@@ -46,12 +48,12 @@ cpf: {{cpf}}
 }
 
 ###
-GET {{localhost}}/statement
+GET {{hostName}}/statement
 Content-Type: application/json
 cpf: {{cpf}}
 
 ###
-POST {{localhost}}/account
+POST {{hostName}}/account
 Content-Type: application/json
 
 {
