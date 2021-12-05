@@ -1,11 +1,12 @@
 import express from 'express';
-import { categoryRoutes } from "./routes/Category.routes";
-import { specificationRoutes } from "./routes/Specification.routes";
 import { router } from "./routes";
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./swagger.json')));
 
 app.use(router)
 
