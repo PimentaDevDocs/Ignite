@@ -1,28 +1,21 @@
 import { Router } from 'express';
 // @ts-ignore
-import { Specification } from "../modules/cars/model/Specification";
-import { SpecificationRepositoryImpl } from "../modules/cars/repository/impl/SpecificationRepositoryImpl";
-import { SpecificationService } from "../modules/cars/service/SpecificationService";
+import { Specification } from '../modules/cars/entity/Specification';
+import multer from "multer";
+import { SpecificationController } from "../modules/cars/controller/SpecificationController";
 
 const specificationRoutes = Router();
 
-const specifications: Specification[] = [];
+const specificationController = new SpecificationController();
 
-const specificationRepository = new SpecificationRepositoryImpl();
+const upload = multer({
+    dest: './temp'
+});
 
-specificationRoutes.get('/', (request, response) => {
+specificationRoutes.get('/', specificationController.list)
 
-    return response.status(200).send(specificationRepository.list());
-})
+specificationRoutes.post('/', specificationController.create);
 
-specificationRoutes.post('/', (request, response) => {
-    const { name, description } = request.body;
-
-    const specificationService = new SpecificationService(specificationRepository);
-
-    specificationService.create({ name, description });
-
-    return response.status(200).send();
-})
+specificationRoutes.post('/import', upload.single('file'), specificationController.import)
 
 export { specificationRoutes };

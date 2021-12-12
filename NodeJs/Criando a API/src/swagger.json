@@ -30,10 +30,6 @@
                   "description": {
                     "type": "string",
                     "example": "Description of Category"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Sample description"
                   }
                 }
               }
@@ -92,6 +88,117 @@
           "404": {
             "description": "Categories not found"
           }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": [
+          "specification"
+        ],
+        "summary": "Create a new specification",
+        "description": "Create a new specification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specification"
+              }
+            }
+          },
+          "description": "Specification to create"
+        },
+        "responses": {
+          "201": {
+            "description": "Specification created"
+          },
+          "400": {
+            "description": "Specification already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "specification"
+        ],
+        "summary": "List all Specification",
+        "description": "List all Specification",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Specification name sample"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Description of Specification"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specifications not found"
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Import categories",
+        "description": "Import categories",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Specification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Specification name sample"
+        },
+        "description": {
+          "type": "string",
+          "example": "Description of Specification"
         }
       }
     }

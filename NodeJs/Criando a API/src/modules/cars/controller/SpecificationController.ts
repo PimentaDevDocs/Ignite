@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { CategoryService } from "../service/CategoryService";
+import { SpecificationService } from "../service/SpecificationService";
 import { container } from "tsyringe";
 
-export class CategoryController {
+export class SpecificationController {
 
     async create(req: Request, res: Response): Promise<Response> {
 
         const { name, description } = req.body;
-        const categoryService = container.resolve(CategoryService);
+        const specificationService = container.resolve(SpecificationService);
         try {
-            await categoryService.create({ name, description });
+            await specificationService.create({ name, description });
             return res.status(201).send();
         } catch (error) {
             // @ts-ignore
@@ -18,17 +18,17 @@ export class CategoryController {
     }
 
     async list(req: Request, res: Response): Promise<Response> {
-        const categoryService = container.resolve(CategoryService);
-        return res.json(await categoryService.list());
+        const specificationService = container.resolve(SpecificationService);
+        return res.json(await specificationService.list());
     }
 
     async import(req: Request, res: Response): Promise<Response> {
 
         const { file } = req;
 
-        const categoryService = container.resolve(CategoryService);
+        const specificationService = container.resolve(SpecificationService);
 
-        await categoryService.readFile(file)
+        await specificationService.readFile(file)
 
         return res.status(201).send();
     }

@@ -1,4 +1,4 @@
-import { Category } from "../model/Category";
+import { Specification } from "../entity/Specification";
 
 export interface ISpecificationDTO {
     name: string;
@@ -7,10 +7,10 @@ export interface ISpecificationDTO {
 
 export interface ISpecificationRepository {
 
-    findByName(name: string): Category | undefined;
+    findByName(name: string): Promise<Specification | undefined>;
 
-    list(): Category[];
+    list(): Promise<Specification[]>;
 
-    create({ name, description }: ISpecificationDTO): void;
+    create({ name, description }: ISpecificationDTO): Promise<void>;
 
 }

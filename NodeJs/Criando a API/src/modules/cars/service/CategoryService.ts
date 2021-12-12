@@ -1,5 +1,7 @@
-import { ICategoriyRepository } from "../repository/ICategoriyRepository";
-import { Category } from "../model/Category";
+import { ICategoryRepository } from "../repository/ICategoryRepository";
+import 'reflect-metadata';
+import { Category } from "../entity/Category";
+import { inject, injectable } from "tsyringe";
 import * as fs from "fs";
 import { parse as csvParse } from "csv-parse";
 
@@ -8,24 +10,27 @@ interface IRequest {
     description: string;
 }
 
-export class CategoriyService {
+@injectable()
+export class CategoryService {
 
-    constructor(private categoriesRepository: ICategoriyRepository) {
+    constructor(
+        @inject("CategoryRepositoryImpl")
+        private categoriesRepository: ICategoryRepository) {
     }
 
-    create({ name, description }: IRequest): void {
+    async create({ name, description }: IRequest): Promise<void> {
 
-        const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+        const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
 
         if (categoryAlreadyExists) {
             throw new Error('Category already exists');
         }
 
-        this.categoriesRepository.create({ name, description });
+        await this.categoriesRepository.create({ name, description });
     }
 
-    list(): Category[] {
-        return this.categoriesRepository.list();
+    async list(): Promise<Category[]> {
+        return await this.categoriesRepository.list();
     }
 
     readFile(file: Express.Multer.File | undefined): Promise<Category[]> {
@@ -53,9 +58,9 @@ export class CategoriyService {
                 .on("end", () => {
                     fs.promises.unlink(file.path);
 
-                    categories.map(cat => {
+                    categories.map(async cat => {
 
-                        if (!this.categoriesRepository.findByName(cat.name))
+                        if (!await this.categoriesRepository.findByName(cat.name))
                             this.create({
                                 name: cat.name,
                                 description: cat.description
